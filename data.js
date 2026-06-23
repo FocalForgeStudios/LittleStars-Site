@@ -26,10 +26,10 @@ const LSData = (() => {
     return data;
   }
 
-  async function signUpWithPassword(email, password, fullName) {
+  async function signUpWithPassword(email, password, fullName, phone) {
     return supabase.auth.signUp({
       email, password,
-      options: { data: { full_name: fullName } }
+      options: { data: { full_name: fullName, phone: phone || null } }
     });
   }
 
@@ -141,6 +141,40 @@ const LSData = (() => {
     return supabase.from('chat_messages').insert({ thread_id: threadId, sender, text });
   }
 
+  // ---------- package requests (Build a Package → "Send Quote") ----------
+  // Works whether or not the visitor is signed in: signed-in parents attach
+  // their real parent_id + child_id; a signed-out visitor's request is still
+  // saved (parent_id left null) so the provider sees it in the dashboard,
+  // it just isn't tied to an account.
+  async function addPackageRequest(req) {
+    const session = await getSession();
+    const profile = session ? await getProfile() : null;
+    const { data, error } = await supabase.from('package_requests').insert({
+      parent_id: session ? session.user.id : null,
+      parent_name: profile?.full_name || req.parentName || 'Website visitor',
+      child_id: req.childId || null,
+      child_name: req.childName,
+      plan_name: req.planName,
+      addons: req.addons || [],
+      total_ugx: req.totalUGX,
+      status: 'new'
+    }).select().single();
+    return { data, error };
+  }
+
+  async function getMyPackageRequests() {
+    const { data, error } = await supabase.from('package_requests').select('*').order('created_at', { ascending: false });
+    if (error) { console.error('getMyPackageRequests failed:', error); return []; }
+    return data.map(rowToPackageRequest);
+  }
+
+  function rowToPackageRequest(r) {
+    return {
+      id: r.id, childId: r.child_id, childName: r.child_name, planName: r.plan_name,
+      addons: r.addons, totalUGX: Number(r.total_ugx), status: r.status, createdAt: r.created_at
+    };
+  }
+
   // ---------- realtime ----------
   function subscribeToThread(threadId, onInsert) {
     const channel = supabase.channel(`chat:${threadId}`)
@@ -155,7 +189,8 @@ const LSData = (() => {
     getChildren, addChild, removeChild,
     getBookings, addBooking,
     getPayments,
-    getOrCreateThread, pushMessage, subscribeToThread
+    getOrCreateThread, pushMessage, subscribeToThread,
+    addPackageRequest, getMyPackageRequests
   };
 })();
 
