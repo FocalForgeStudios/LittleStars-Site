@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
 <body>
 
@@ -195,6 +195,20 @@
 
     <div class="builder-shell reveal">
       <div class="builder-left">
+
+        <!-- Shown only to signed-in parents: pick which child this package is for,
+             instead of re-typing name/age/notes per add-on below. -->
+        <div class="tier-group" id="builderChildPicker" style="display:none;">
+          <span class="tier-label">Who is this package for?</span>
+          <select id="builderChildSelect" style="width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid rgba(142,95,214,0.22); font-size:14px;">
+            <option value="">Select a child from your roster…</option>
+          </select>
+          <div class="builder-new-child-toggle">
+            <button type="button" id="builderNewChildBtn" class="btn btn-ghost btn-sm">➕ Not listed — type a new name</button>
+          </div>
+          <input type="text" id="builderNewChildName" placeholder="Child's full name" style="display:none; margin-top:8px;">
+        </div>
+
         <div class="tier-group">
           <span class="tier-label">Core Plan — Pick-up, Drop-off &amp; After-School <span style="opacity:.6; font-weight:400;">(optional)</span></span>
           <div class="tier-options" id="tierOptions">
@@ -217,7 +231,7 @@
           </div>
         </div>
 
-        <div class="tier-group">
+        <div class="tier-group" id="addonsGroup">
           <span class="tier-label">Add Enrichment Sessions (term-time rate, per session)</span>
 
           <div class="addon-row">
@@ -227,7 +241,7 @@
             </div>
             <div class="stepper" data-addon="bible" data-price="100000"><button class="dec" title="Minus: remove one child from this session" aria-label="Decrease">−</button><span class="count">0</span><button class="inc" title="Plus: add one more child to this session" aria-label="Increase">+</button></div>
           </div>
-          <div class="stepper-hint">💡 Tap <strong>+</strong> once for each child you want in Bible Study (a quick form will appear below for their name, age &amp; notes). Tap <strong>−</strong> to remove a child.</div>
+          <div class="stepper-hint" id="stepperHint">💡 Tap <strong>+</strong> once for each child you want in Bible Study (a quick form will appear below for their name, age &amp; notes). Tap <strong>−</strong> to remove a child.</div>
           <div class="child-roster" data-roster="bible"></div>
 
           <div class="addon-row">
@@ -319,7 +333,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Pricing</div>
-      <h2>Pricing</h2>
+      <h2>Straightforward pricing, in Ugandan Shillings.</h2>
       <p>Our core plan bundles transit and after-school activities. Term-time and holiday programs are priced separately, so you only pay for what your child uses.</p>
     </div>
 
@@ -379,6 +393,7 @@
 
       <form id="portalAuthForm">
         <input type="text" id="portalFullName" placeholder="Full name" style="display:none;">
+        <input type="tel" id="portalPhone" placeholder="Phone number (optional)" style="display:none;">
         <input type="email" id="portalEmail" placeholder="Email" required autocomplete="username">
         <input type="password" id="portalPassword" placeholder="Password" autocomplete="current-password">
         <button type="submit" class="btn btn-primary" style="width:100%;" id="portalAuthSubmit">Sign In</button>
