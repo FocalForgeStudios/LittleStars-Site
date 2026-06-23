@@ -9,8 +9,30 @@ window.addEventListener('scroll', () => header.classList.toggle('scrolled', wind
 // ---------- mobile menu ----------
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobileMenu');
-burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+function setMobileMenuOpen(open) {
+  mobileMenu.classList.toggle('open', open);
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+// Tapping the burger toggles open/closed — previously this only ever opened
+// the menu (mobileMenu.classList.toggle('open') with no matching toggle on
+// the burger itself), so once open, tapping the same icon again did nothing
+// and the icon never visually changed to show it could be tapped to close.
+burger.setAttribute('role', 'button');
+burger.setAttribute('aria-label', 'Toggle menu');
+burger.setAttribute('aria-expanded', 'false');
+burger.addEventListener('click', () => setMobileMenuOpen(!mobileMenu.classList.contains('open')));
+
+// Picking a link still closes the menu, same as before.
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMobileMenuOpen(false)));
+
+// Extra ways out, since a full-screen menu with only one tiny tap target
+// to close it is easy to feel "stuck" in: tapping the empty background,
+// or pressing Escape, both close it too.
+mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) setMobileMenuOpen(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMobileMenuOpen(false); });
 
 // ---------- scroll reveal ----------
 const revealEls = document.querySelectorAll('.reveal, .stop-card');
@@ -114,14 +136,83 @@ document.querySelectorAll('[data-ugx]').forEach(el => {
 });
 
 /* ===================================================================
-   PACKAGE BUILDER — tiers, add-ons, per-child roster sub-forms
+   PACKAGE BUILDER — tiers, add-ons, child selection
+
+   Two modes, decided by sign-in state:
+   - Signed OUT (first-time visitor): exactly the original flow — a
+     name/age/notes mini-form appears under each add-on you increment,
+     since there's no real account or roster to pick from yet.
+   - Signed IN: a single "Who is this for?" selector appears once,
+     above the tiers, listing the parent's real children. The per-addon
+     mini-forms are skipped entirely — picking a child here is enough.
+     A "not listed" fallback still allows typing a new name (e.g. a
+     sibling not yet added to the roster), per Andrew's request.
+
+   Either way, clicking "Send" both opens WhatsApp (unchanged) AND saves
+   a row to package_requests, which is what powers the admin dashboard's
+   new "Package Requests" tab and its live notification toast.
    =================================================================== */
 const fmt = n => n.toLocaleString('en-US');
 let tier = {name:'None', price:0};
 const addonState = {bible:0, bookclub:0, homework:0};
 const addonNames = {bible:'Bible Study', bookclub:'Book Club', homework:'Homework Support'};
-// per-addon child roster: { bible: [{name,age,notes}], ... }
+// per-addon child roster, used only in the SIGNED-OUT flow: { bible: [{name,age,notes}], ... }
 const addonChildren = {bible:[], bookclub:[], homework:[]};
+
+let builderSignedIn = false;
+let builderMyChildren = [];      // real roster, signed-in mode only
+let builderSelectedChild = null; // { id, name } or { id: null, name } for a typed fallback name
+
+const builderChildPicker = document.getElementById('builderChildPicker');
+const builderChildSelect = document.getElementById('builderChildSelect');
+const builderNewChildBtn = document.getElementById('builderNewChildBtn');
+const builderNewChildName = document.getElementById('builderNewChildName');
+const stepperHint = document.getElementById('stepperHint');
+
+async function refreshBuilderAuthState() {
+  const session = await LSData.getSession();
+  builderSignedIn = !!session;
+  if (builderSignedIn) {
+    builderMyChildren = await LSData.getChildren();
+    builderChildPicker.style.display = 'block';
+    stepperHint.style.display = 'none';
+    populateBuilderChildSelect();
+  } else {
+    builderChildPicker.style.display = 'none';
+    stepperHint.style.display = 'block';
+    builderSelectedChild = null;
+  }
+  // re-render any open per-addon rosters to match the new mode
+  Object.keys(addonChildren).forEach(renderChildRoster);
+}
+document.addEventListener('lse:authChanged', refreshBuilderAuthState);
+document.addEventListener('lse:childrenChanged', refreshBuilderAuthState);
+refreshBuilderAuthState();
+
+function populateBuilderChildSelect() {
+  if (!builderMyChildren.length) {
+    builderChildSelect.innerHTML = `<option value="">No children on your roster yet — use "Not listed" below</option>`;
+  } else {
+    builderChildSelect.innerHTML = `<option value="">Select a child from your roster…</option>` +
+      builderMyChildren.map(k => `<option value="${k.id}">${k.name}</option>`).join('');
+  }
+}
+builderChildSelect.addEventListener('change', () => {
+  const kid = builderMyChildren.find(k => k.id === builderChildSelect.value);
+  builderSelectedChild = kid ? { id: kid.id, name: kid.name } : null;
+  builderNewChildName.style.display = 'none';
+  builderNewChildName.value = '';
+});
+builderNewChildBtn.addEventListener('click', () => {
+  builderChildSelect.value = '';
+  builderSelectedChild = null;
+  builderNewChildName.style.display = builderNewChildName.style.display === 'none' ? 'block' : 'none';
+  if (builderNewChildName.style.display === 'block') builderNewChildName.focus();
+});
+builderNewChildName.addEventListener('input', () => {
+  const name = builderNewChildName.value.trim();
+  builderSelectedChild = name ? { id: null, name } : null;
+});
 
 const tierOpts = document.querySelectorAll('.tier-opt');
 tierOpts.forEach(opt => {
@@ -137,6 +228,9 @@ tierOpts.forEach(opt => {
 function renderChildRoster(key) {
   const roster = document.querySelector(`.child-roster[data-roster="${key}"]`);
   if (!roster) return;
+  // signed-in mode: child identity comes from the picker above, not per-addon forms
+  if (builderSignedIn) { roster.classList.remove('open'); roster.innerHTML = ''; return; }
+
   const kids = addonChildren[key];
   roster.classList.toggle('open', kids.length > 0);
   roster.innerHTML = kids.map((kid, i) => `
@@ -173,8 +267,8 @@ document.querySelectorAll('.stepper').forEach(step => {
   step.querySelector('.inc').addEventListener('click', () => {
     addonState[key] = Math.min(addonState[key]+1, 12);
     countEl.textContent = addonState[key];
-    // "+" registers another child for this session — slide open a sub-form for their details
-    addonChildren[key].push({name:'', age:'', notes:''});
+    // signed-out mode only: "+" opens a sub-form for that child's details
+    if (!builderSignedIn) addonChildren[key].push({name:'', age:'', notes:''});
     renderChildRoster(key);
     recalc();
   });
@@ -182,19 +276,21 @@ document.querySelectorAll('.stepper').forEach(step => {
     if (addonState[key] === 0) return;
     addonState[key] = Math.max(addonState[key]-1, 0);
     countEl.textContent = addonState[key];
-    addonChildren[key].pop();
+    if (!builderSignedIn) addonChildren[key].pop();
     renderChildRoster(key);
     recalc();
   });
 });
 
 const amountWrap = document.getElementById('amountWrap');
+let lastComputedTotal = 0;
 function recalc(){
   const addonTotal = Object.keys(addonState).reduce((sum,k) => {
     const priceEl = document.querySelector(`.stepper[data-addon="${k}"]`);
     return sum + addonState[k] * parseInt(priceEl.dataset.price,10);
   }, 0);
   const total = tier.price + addonTotal;
+  lastComputedTotal = total;
 
   document.getElementById('totalAmt').textContent = fmt(total);
   document.getElementById('lineTier').textContent = tier.name;
@@ -208,22 +304,57 @@ function recalc(){
   requestAnimationFrame(() => amountWrap.classList.add('bump'));
   setTimeout(() => amountWrap.classList.remove('bump'), 260);
 
-  const addonSummary = Object.entries(addonState).filter(([k,v]) => v > 0).map(([k,v]) => `${v}x ${addonNames[k]}`).join(', ');
-  const msgLines = [
-    `Hi Little Stars Enrichment, I'd like to build this package:`,
-  ];
+  document.getElementById('sendWaBtn').href = buildWhatsAppLink(total);
+}
+
+function buildAddonSummary() {
+  return Object.entries(addonState).filter(([k,v]) => v > 0).map(([k,v]) => ({ key: k, name: addonNames[k], count: v }));
+}
+
+function buildWhatsAppLink(total) {
+  const addonSummary = buildAddonSummary();
+  const msgLines = [`Hi Little Stars Enrichment, I'd like to build this package:`];
   if (tier.price > 0) msgLines.push(`- Core plan: ${tier.name} (${fmt(tier.price)} UGX)`);
-  if (addonSummary) msgLines.push(`- Add-ons: ${addonSummary}`);
-  // include named children where provided, so the provider isn't stuck with "Unknown Children"
-  Object.entries(addonChildren).forEach(([k, kids]) => {
-    kids.filter(c => c.name).forEach(c => {
-      msgLines.push(`  • ${addonNames[k]}: ${c.name}${c.age ? ', age ' + c.age : ''}${c.notes ? ' (' + c.notes + ')' : ''}`);
+  if (addonSummary.length) msgLines.push(`- Add-ons: ${addonSummary.map(a => `${a.count}x ${a.name}`).join(', ')}`);
+
+  if (builderSignedIn) {
+    if (builderSelectedChild) msgLines.push(`  • For: ${builderSelectedChild.name}`);
+  } else {
+    // include named children where provided, so the provider isn't stuck with "Unknown Children"
+    Object.entries(addonChildren).forEach(([k, kids]) => {
+      kids.filter(c => c.name).forEach(c => {
+        msgLines.push(`  • ${addonNames[k]}: ${c.name}${c.age ? ', age ' + c.age : ''}${c.notes ? ' (' + c.notes + ')' : ''}`);
+      });
     });
-  });
+  }
   msgLines.push(`Estimated total: ${fmt(total)} UGX (≈ ${fmtUSD(ugxToUsd(total))} USD)`);
   msgLines.push(`Could you confirm availability for my child?`);
-  document.getElementById('sendWaBtn').href = `https://wa.me/256704383497?text=${encodeURIComponent(msgLines.join('\n'))}`;
+  return `https://wa.me/256704383497?text=${encodeURIComponent(msgLines.join('\n'))}`;
 }
+
+// Saving the request happens on click, right before WhatsApp opens in its new tab —
+// this doesn't block or delay WhatsApp opening, it just also writes the row.
+document.getElementById('sendWaBtn').addEventListener('click', async () => {
+  const addonSummary = buildAddonSummary();
+  let childName;
+  let childId = null;
+  if (builderSignedIn) {
+    if (!builderSelectedChild) { alert('Please select a child (or use "Not listed" to type a name) before sending.'); return; }
+    childName = builderSelectedChild.name;
+    childId = builderSelectedChild.id;
+  } else {
+    const namedKid = Object.values(addonChildren).flat().find(c => c.name);
+    childName = namedKid ? namedKid.name : 'Not specified';
+  }
+  const { error } = await LSData.addPackageRequest({
+    childId, childName,
+    planName: tier.name,
+    addons: addonSummary,
+    totalUGX: lastComputedTotal
+  });
+  if (error) console.error('Could not save package request (WhatsApp will still open):', error.message);
+});
+
 recalc();
 
 /* ===================================================================
