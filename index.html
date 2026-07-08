@@ -3,28 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Little Stars Enrichment — Safe Transit & Child Development, Kampala</title>
-<meta name="description" content="Safe school transit and personalised child development programs in Kampala — transit services, academic support, life skills and spiritual growth, built into one custom package.">
+<title>Little Stars Enrichment - Safe Transit & Child Development, Kampala</title>
+<meta name="description" content="Safe school transit and personalised child development programs in Kampala - transit services, academic support, life skills and spiritual growth, built into one custom package.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
 <body>
-
-<!-- ============ HEADER ============ -->
 <header id="siteHeader">
-  <div class="wrap">
+  <div class="top-ribbon">
+    <div class="wrap ribbon-row">
+      <span>Journey Since 2026</span>
+      <span>Kampala · Safe Transit & Child Development</span>
+      <span>8.00am-4.00pm</span>
+    </div>
+  </div>
+  <div class="wrap nav-wrap">
     <nav>
-      <a href="#top" class="logo"><span class="star">✦</span> Little Stars Enrichment</a>
+      <a href="#top" class="logo"><span class="logo-mark">LS</span><span>Little Stars<br><small>Enrichment</small></span></a>
       <div class="nav-links">
-        <a href="#stops">Services</a>
-        <a href="#builder">Build a Package</a>
-        <a href="#booking">Book a Session</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#portal">Parent Portal</a>
-        <a href="#faq">FAQ</a>
+        <a href="#stops">Services</a><a href="#builder">Build a Package</a><a href="#booking">Book a Session</a><a href="#pricing">Pricing</a><a href="#portal">Parent Portal</a><a href="#faq">FAQ</a>
       </div>
       <div class="nav-cta">
         <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-primary btn-sm" target="_blank" rel="noopener">WhatsApp Us</a>
@@ -35,506 +35,95 @@
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#stops">Services</a>
-  <a href="#builder">Build a Package</a>
-  <a href="#booking">Book a Session</a>
-  <a href="#pricing">Pricing</a>
-  <a href="#portal">Parent Portal</a>
-  <a href="#faq">FAQ</a>
-  <a href="https://wa.me/256704383497" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="#stops">Services</a><a href="#builder">Build a Package</a><a href="#booking">Book a Session</a><a href="#pricing">Pricing</a><a href="#portal">Parent Portal</a><a href="#faq">FAQ</a><a href="https://wa.me/256704383497" target="_blank" rel="noopener">WhatsApp</a>
 </div>
 
-<!-- ============ HERO ============ -->
 <section class="hero" id="top">
+  <div class="hero-social" aria-hidden="true"><span>Facebook</span><span>TikTok</span><span>WhatsApp</span></div>
   <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow" style="color:var(--brand-light);">Kampala · Transit &amp; Child Development</div>
+    <div class="hero-copy">
+      <div class="eyebrow">Kindergarten Program</div>
       <h1>Every school run is a chance to build <em>something bigger.</em></h1>
-      <p class="lead">Little Stars Enrichment combines safe, reliable transit with academic, life-skills and faith-based enrichment — one provider, one schedule, one care package built around your child.</p>
+      <p class="lead">Little Stars Enrichment combines safe, reliable transit with academic, life-skills and faith-based enrichment - one provider, one schedule, one care package built around your child.</p>
       <div class="hero-ctas">
-        <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-primary" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
-        <a href="#builder" class="btn btn-ghost">Build your child's package →</a>
+        <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-primary" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <a href="#builder" class="btn btn-ghost">Build your child's package</a>
       </div>
       <div class="hero-meta">
-        <div><strong>4</strong>core pillars in one package</div>
-        <div><strong>Daily–Monthly</strong>flexible plans</div>
-        <div><strong>2</strong>direct phone lines</div>
+        <div><strong>4</strong><span>core pillars in one package</span></div>
+        <div><strong>Daily-Monthly</strong><span>flexible plans</span></div>
+        <div><strong>2</strong><span>direct phone lines</span></div>
       </div>
     </div>
-    <div class="route-art" aria-hidden="true" id="routeArt">
-      <svg viewBox="0 0 400 480" preserveAspectRatio="none">
-        <path class="route-path-bg" d="M40 30 C 220 60, 60 160, 200 190 S 360 280, 70 320 S 220 420, 150 450" fill="none"/>
-        <path id="routePath" class="route-path" d="M40 30 C 220 60, 60 160, 200 190 S 360 280, 70 320 S 220 420, 150 450" fill="none"/>
-      </svg>
-      <div id="vanIcon" class="van">🚐</div>
-      <div class="route-stop"><span class="dot"></span> Morning pick-up</div>
-      <div class="route-stop"><span class="dot"></span> Drop-off at school</div>
-      <div class="route-stop"><span class="dot"></span> Activities &amp; enrichment</div>
-      <div class="route-stop"><span class="dot"></span> Safely home</div>
+    <div class="hero-stage">
+      <img src="Girl holding bible.jpg" alt="Girl holding a Bible" class="hero-main-img">
+      <div class="floating-card card-one"><strong>Faith-based growth</strong><span>Optional Bible Study and character building</span></div>
+      <div class="floating-card card-two"><strong>Safe school runs</strong><span>One schedule built around your child</span></div>
+      <div class="shape-dot dot-a"></div><div class="shape-dot dot-b"></div><div class="scribble"></div>
     </div>
   </div>
 </section>
 
-<!-- ============ TRUST STRIP ============ -->
 <div class="trust">
   <div class="wrap trust-row">
-    <div>Vetted, reliable drivers</div>
-    <div>Built around your child's actual school &amp; schedule</div>
-    <div>Faith-based character building, on request</div>
-    <div>One partner for transit + enrichment</div>
+    <div>Vetted, reliable drivers</div><div>Built around your child's actual school & schedule</div><div>Faith-based character building, on request</div><div>One partner for transit + enrichment</div>
   </div>
 </div>
 
-<!-- ============ SERVICES / STOPS ============ -->
-<section class="stops" id="stops">
-  <div class="wrap">
+<section class="intro-photo-band">
+  <div class="wrap intro-grid">
+    <div class="photo-frame reveal"><img src="Toddler and teacher.jpg" alt="Teacher reading with a child"></div>
     <div class="section-head reveal">
       <div class="eyebrow">The Route</div>
       <h2>Four stops on the way to your child's bright future.</h2>
-      <p>Mix and match any of these into a single, customised care package. Each session has its own photo spot below — just drop your image in and it appears automatically.</p>
-    </div>
-  </div>
-
-  <div class="wrap" style="position:relative;">
-    <div class="stop-line"></div>
-
-    <!-- STOP 1: TRANSIT -->
-    <div class="stop-row left">
-      <div class="stop-card reveal">
-        <span class="tag">Stop 01</span>
-        <div class="icon">🚐</div>
-        <h3>Transit Services</h3>
-        <div class="session-grid">
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/transit-school-run-client.jpg" alt="Child on the school run in the family car" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">🚗</span>Photo: client car</div></div>
-            <div class="session-text"><b>School Run (Client Car)</b><span>Safe morning drop-offs and afternoon pick-ups using your family vehicle.</span></div>
-          </div>
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/transit-school-run-provider.jpg" alt="Child being picked up in the provider's car" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">🚐</span>Photo: provider car</div></div>
-            <div class="session-text"><b>School Run (Provider Car)</b><span>Reliable pick-up and drop-off using our vehicle.</span></div>
-          </div>
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/transit-activity-shuttle.jpg" alt="Child being shuttled to an extracurricular activity" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">⚽</span>Photo: shuttle</div></div>
-            <div class="session-text"><b>Activity Shuttle</b><span>Transport to and from sports, music or other extracurricular classes.</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="stop-num">01 / Transit<span class="big">🚐</span></div>
-      <div class="stop-marker"></div>
-    </div>
-
-    <!-- STOP 2: ACADEMIC -->
-    <div class="stop-row right">
-      <div class="stop-num" style="text-align:right;">02 / Academic<span class="big" style="text-align:right;">📚</span></div>
-      <div class="stop-card reveal">
-        <span class="tag">Stop 02</span>
-        <div class="icon">📚</div>
-        <h3>Academic Support</h3>
-        <div class="session-grid">
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/academic-homework-rescue.jpg" alt="Child doing homework with a supervisor" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">✏️</span>Photo: homework</div></div>
-            <div class="session-text"><b>Homework Rescue</b><span>Focused, daily supervision so school assignments get done — and done right.</span></div>
-          </div>
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/academic-holiday-enrichment.jpg" alt="Children in a holiday enrichment class" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">🏖️</span>Photo: holiday class</div></div>
-            <div class="session-text"><b>Holiday Enrichment Classes</b><span>Structured learning sessions during school breaks to prevent learning loss.</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="stop-marker"></div>
-    </div>
-
-    <!-- STOP 3: LIFE SKILLS -->
-    <div class="stop-row left">
-      <div class="stop-card reveal">
-        <span class="tag">Stop 03</span>
-        <div class="icon">🌟</div>
-        <h3>Life Skills &amp; Culture</h3>
-        <div class="session-grid">
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/lifeskills-table-etiquette.jpg" alt="Child practicing table etiquette" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">🍽️</span>Photo: etiquette</div></div>
-            <div class="session-text"><b>Table Etiquette Training</b><span>Hands-on lessons in polite dining manners, posture and table setting.</span></div>
-          </div>
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/lifeskills-book-club.jpg" alt="Children at junior book club" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">📖</span>Photo: book club</div></div>
-            <div class="session-text"><b>Junior Book Club</b><span>Interactive reading sessions that build vocabulary, critical thinking and a love of books.</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="stop-num">03 / Life Skills<span class="big">🌟</span></div>
-      <div class="stop-marker"></div>
-    </div>
-
-    <!-- STOP 4: SPIRITUAL -->
-    <div class="stop-row right">
-      <div class="stop-num" style="text-align:right;">04 / Spiritual<span class="big" style="text-align:right;">⛪</span></div>
-      <div class="stop-card reveal">
-        <span class="tag">Stop 04</span>
-        <div class="icon">⛪</div>
-        <h3>Spiritual Growth</h3>
-        <div class="session-grid">
-          <div class="session-tile">
-            <div class="img-slot"><img src="images/spiritual-bible-study.jpg" alt="Children at home Bible study" onerror="this.parentElement.classList.add('broken')"><div class="ph"><span class="pi">📕</span>Photo: Bible study</div></div>
-            <div class="session-text"><b>Home Bible Study</b><span>Age-appropriate scripture reading, memory verse practice and character-building discussions.</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="stop-marker"></div>
+      <p>Mix and match any of these into a single, customised care package. Each session has its own photo spot below - just drop your image in and it appears automatically.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ PACKAGE BUILDER ============ -->
+<section class="stops" id="stops">
+  <div class="wrap service-grid">
+    <article class="stop-card reveal"><span class="tag">Stop 01</span><div class="icon">🚐</div><h3>Transit Services</h3><div class="session-grid"><div class="session-tile"><div class="img-slot"><img src="Toddler and teacher.jpg" alt="Child on the school run"></div><div class="session-text"><b>School Run (Client Car)</b><span>Safe morning drop-offs and afternoon pick-ups using your family vehicle.</span></div></div><div class="session-tile"><div class="img-slot"><img src="Girl holding bible.jpg" alt="Child being picked up"></div><div class="session-text"><b>School Run (Provider Car)</b><span>Reliable pick-up and drop-off using our vehicle.</span></div></div><div class="session-tile"><div class="img-slot"><img src="Toddler and teacher.jpg" alt="Activity shuttle"></div><div class="session-text"><b>Activity Shuttle</b><span>Transport to and from sports, music or other extracurricular classes.</span></div></div></div></article>
+    <article class="stop-card reveal"><span class="tag">Stop 02</span><div class="icon">📚</div><h3>Academic Support</h3><div class="session-grid"><div class="session-tile"><div class="img-slot"><img src="Toddler and teacher.jpg" alt="Homework support"></div><div class="session-text"><b>Homework Rescue</b><span>Focused, daily supervision so school assignments get done - and done right.</span></div></div><div class="session-tile"><div class="img-slot"><img src="Girl holding bible.jpg" alt="Holiday enrichment"></div><div class="session-text"><b>Holiday Enrichment Classes</b><span>Structured learning sessions during school breaks to prevent learning loss.</span></div></div></div></article>
+    <article class="stop-card reveal"><span class="tag">Stop 03</span><div class="icon">🌟</div><h3>Life Skills & Culture</h3><div class="session-grid"><div class="session-tile"><div class="img-slot"><img src="Toddler and teacher.jpg" alt="Table etiquette"></div><div class="session-text"><b>Table Etiquette Training</b><span>Hands-on lessons in polite dining manners, posture and table setting.</span></div></div><div class="session-tile"><div class="img-slot"><img src="Girl holding bible.jpg" alt="Book club"></div><div class="session-text"><b>Junior Book Club</b><span>Interactive reading sessions that build vocabulary, critical thinking and a love of books.</span></div></div></div></article>
+    <article class="stop-card reveal"><span class="tag">Stop 04</span><div class="icon">⛪</div><h3>Spiritual Growth</h3><div class="session-grid"><div class="session-tile"><div class="img-slot"><img src="Girl holding bible.jpg" alt="Bible study"></div><div class="session-text"><b>Home Bible Study</b><span>Age-appropriate scripture reading, memory verse practice and character-building discussions.</span></div></div></div></article>
+  </div>
+</section>
+
 <section class="builder" id="builder">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Build a Package</div>
-      <h2>Design your child's care package, see the price instantly.</h2>
-      <p>Pick a core transit &amp; after-school plan, then add the enrichment sessions your child needs. The total updates as you go — and you can send it straight to us on WhatsApp. <strong>This is a quick quote, not a booking</strong> — to actually schedule a session or track payments, use the Parent Portal below.</p>
-    </div>
-
+    <div class="section-head reveal"><div class="eyebrow">Build a Package</div><h2>Design your child's care package, see the price instantly.</h2><p>Pick a core transit & after-school plan, then add the enrichment sessions your child needs. The total updates as you go - and you can send it straight to us on WhatsApp. <strong>This is a quick quote, not a booking</strong> - to actually schedule a session or track payments, use the Parent Portal below.</p></div>
     <div class="builder-shell reveal">
       <div class="builder-left">
-        <div class="tier-group">
-          <span class="tier-label">Core Plan — Pick-up, Drop-off &amp; After-School <span style="opacity:.6; font-weight:400;">(optional)</span></span>
-          <div class="tier-options" id="tierOptions">
-            <div class="tier-opt active" data-tier="none" data-price="0">
-              <div class="name">None</div>
-              <div class="price mono">Not needed</div>
-            </div>
-            <div class="tier-opt" data-tier="daily" data-price="75000">
-              <div class="name">Daily</div>
-              <div class="price mono">75,000 UGX<span class="usd-amt">(~ $19.74)</span></div>
-            </div>
-            <div class="tier-opt" data-tier="weekly" data-price="450000">
-              <div class="name">Weekly</div>
-              <div class="price mono">450,000 UGX<span class="usd-amt">(~ $118.42)</span></div>
-            </div>
-            <div class="tier-opt" data-tier="monthly" data-price="2500000">
-              <div class="name">Monthly</div>
-              <div class="price mono">2,500,000 UGX<span class="usd-amt">(~ $657.89)</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tier-group">
-          <span class="tier-label">Add Enrichment Sessions (term-time rate, per session)</span>
-
-          <div class="addon-row">
-            <div class="addon-info">
-              <span class="icon">⛪</span>
-              <div><div class="addon-name">Bible Study Session</div><div class="addon-sub mono">100,000 UGX / session <span class="usd-amt">(~ $26.32)</span></div></div>
-            </div>
-            <div class="stepper" data-addon="bible" data-price="100000"><button class="dec" title="Minus: remove one child from this session" aria-label="Decrease">−</button><span class="count">0</span><button class="inc" title="Plus: add one more child to this session" aria-label="Increase">+</button></div>
-          </div>
-          <div class="stepper-hint">💡 Tap <strong>+</strong> once for each child you want in Bible Study (a quick form will appear below for their name, age &amp; notes). Tap <strong>−</strong> to remove a child.</div>
-          <div class="child-roster" data-roster="bible"></div>
-
-          <div class="addon-row">
-            <div class="addon-info">
-              <span class="icon">📖</span>
-              <div><div class="addon-name">Book Club Session</div><div class="addon-sub mono">100,000 UGX / session <span class="usd-amt">(~ $26.32)</span></div></div>
-            </div>
-            <div class="stepper" data-addon="bookclub" data-price="100000"><button class="dec" title="Minus: remove one child" aria-label="Decrease">−</button><span class="count">0</span><button class="inc" title="Plus: add one more child" aria-label="Increase">+</button></div>
-          </div>
-          <div class="child-roster" data-roster="bookclub"></div>
-
-          <div class="addon-row">
-            <div class="addon-info">
-              <span class="icon">✏️</span>
-              <div><div class="addon-name">Weekend Homework Support</div><div class="addon-sub mono">75,000 UGX / session <span class="usd-amt">(~ $19.74)</span></div></div>
-            </div>
-            <div class="stepper" data-addon="homework" data-price="75000"><button class="dec" title="Minus: remove one child" aria-label="Decrease">−</button><span class="count">0</span><button class="inc" title="Plus: add one more child" aria-label="Increase">+</button></div>
-          </div>
-          <div class="child-roster" data-roster="homework"></div>
+        <div class="tier-group" id="builderChildPicker" style="display:none;"><span class="tier-label">Who is this package for?</span><select id="builderChildSelect"><option value="">Select a child from your roster...</option></select><div class="builder-new-child-toggle"><button type="button" id="builderNewChildBtn" class="btn btn-ghost btn-sm">Not listed - type a new name</button></div><input type="text" id="builderNewChildName" placeholder="Child's full name" style="display:none; margin-top:8px;"></div>
+        <div class="tier-group"><span class="tier-label">Core Plan - Pick-up, Drop-off & After-School <span>(optional)</span></span><div class="tier-options" id="tierOptions"><div class="tier-opt active" data-tier="none" data-price="0"><div class="name">None</div><div class="price mono">Not needed</div></div><div class="tier-opt" data-tier="daily" data-price="75000"><div class="name">Daily</div><div class="price mono">75,000 UGX<span class="usd-amt">(~ $19.74)</span></div></div><div class="tier-opt" data-tier="weekly" data-price="450000"><div class="name">Weekly</div><div class="price mono">450,000 UGX<span class="usd-amt">(~ $118.42)</span></div></div><div class="tier-opt" data-tier="monthly" data-price="2500000"><div class="name">Monthly</div><div class="price mono">2,500,000 UGX<span class="usd-amt">(~ $657.89)</span></div></div></div></div>
+        <div class="tier-group" id="addonsGroup"><span class="tier-label">Add Enrichment Sessions (term-time rate, per session)</span>
+          <div class="addon-row"><div class="addon-info"><span class="icon">⛪</span><div><div class="addon-name">Bible Study Session</div><div class="addon-sub mono">100,000 UGX / session <span class="usd-amt">(~ $26.32)</span></div></div></div><div class="stepper" data-addon="bible" data-price="100000"><button class="dec" aria-label="Decrease">-</button><span class="count">0</span><button class="inc" aria-label="Increase">+</button></div></div><div class="stepper-hint" id="stepperHint">Tap <strong>+</strong> once for each child you want in Bible Study. Tap <strong>-</strong> to remove a child.</div><div class="child-roster" data-roster="bible"></div>
+          <div class="addon-row"><div class="addon-info"><span class="icon">📖</span><div><div class="addon-name">Book Club Session</div><div class="addon-sub mono">100,000 UGX / session <span class="usd-amt">(~ $26.32)</span></div></div></div><div class="stepper" data-addon="bookclub" data-price="100000"><button class="dec" aria-label="Decrease">-</button><span class="count">0</span><button class="inc" aria-label="Increase">+</button></div></div><div class="child-roster" data-roster="bookclub"></div>
+          <div class="addon-row"><div class="addon-info"><span class="icon">✏️</span><div><div class="addon-name">Weekend Homework Support</div><div class="addon-sub mono">75,000 UGX / session <span class="usd-amt">(~ $19.74)</span></div></div></div><div class="stepper" data-addon="homework" data-price="75000"><button class="dec" aria-label="Decrease">-</button><span class="count">0</span><button class="inc" aria-label="Increase">+</button></div></div><div class="child-roster" data-roster="homework"></div>
         </div>
       </div>
-
-      <div class="builder-right">
-        <div class="total-card">
-          <span class="label">Estimated Total</span>
-          <div class="amount" id="amountWrap"><span id="totalAmt">450,000</span> <span>UGX</span></div>
-          <div class="fx-note" id="totalAmtUSD">≈ $118.42 USD</div>
-          <div class="total-line"><span id="lineTier">Weekly plan</span><span id="lineTierAmt" class="mono">450,000</span></div>
-          <div class="total-line"><span id="lineAddons">Add-ons</span><span id="lineAddonsAmt" class="mono">0</span></div>
-        </div>
-        <a href="#" id="sendWaBtn" class="btn btn-primary" target="_blank" rel="noopener">📩 Send this package on WhatsApp</a>
-        <p class="builder-note">This is an indicative estimate built from our standard rate card. Final pricing is confirmed after a short call, based on routing, distance and your child's exact schedule. USD figures use an indicative FX rate and are for international clients' convenience.</p>
-      </div>
+      <div class="builder-right"><div class="total-card"><span class="label">Estimated Total</span><div class="amount" id="amountWrap"><span id="totalAmt">450,000</span> <span>UGX</span></div><div class="fx-note" id="totalAmtUSD">≈ $118.42 USD</div><div class="total-line"><span id="lineTier">Weekly plan</span><span id="lineTierAmt" class="mono">450,000</span></div><div class="total-line"><span id="lineAddons">Add-ons</span><span id="lineAddonsAmt" class="mono">0</span></div></div><a href="#" id="sendWaBtn" class="btn btn-primary" target="_blank" rel="noopener">Send this package on WhatsApp</a><p class="builder-note">This is an indicative estimate built from our standard rate card. Final pricing is confirmed after a short call, based on routing, distance and your child's exact schedule. USD figures use an indicative FX rate and are for international clients' convenience.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ BOOKING / ONLINE SESSIONS (international clients) ============ -->
-<section class="booking" id="booking">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Online Sessions</div>
-      <h2>Book a live online session, wherever you're calling from.</h2>
-      <p>Bible Study and other enrichment sessions run live online too — great for clients abroad. Pick a date and time, and we'll show you exactly when that is in your own time zone, so nobody misses a class.</p>
-    </div>
+<section class="booking" id="booking"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Online Sessions</div><h2>Book a live online session, wherever you're calling from.</h2><p>Bible Study and other enrichment sessions run live online too - great for clients abroad. Pick a date and time, and we'll show you exactly when that is in your own time zone, so nobody misses a class.</p></div><div class="booking-shell"><div class="booking-card reveal"><h3>Schedule a session</h3><form id="bookingForm"><div class="field-group"><label>Child</label><select id="bookChild" required></select></div><div class="field-group"><label>Package</label><select id="bookPackage" required><option>Bible Study Session</option><option>Book Club Session</option><option>Weekend Homework Support</option></select></div><div class="field-group"><label>Date (provider's calendar, East Africa Time)</label><input type="date" id="bookDate" required></div><div class="field-group"><label>Time (East Africa Time, UTC+3)</label><input type="time" id="bookTime" required></div><div class="tz-display"><div class="tz-row"><span class="lbl">Your detected time zone</span><span class="val" id="detectedTz">-</span></div><div id="tzOutput"></div></div><button type="submit" class="btn btn-primary form-btn">Confirm Booking</button></form></div><div class="reveal"><h3 class="list-title">Upcoming sessions</h3><div class="booking-list" id="bookingList"></div></div></div></div></section>
 
-    <div class="booking-shell">
-      <div class="booking-card reveal">
-        <h3>Schedule a session</h3>
-        <form id="bookingForm">
-          <div class="field-group">
-            <label>Child</label>
-            <select id="bookChild" required></select>
-          </div>
-          <div class="field-group">
-            <label>Package</label>
-            <select id="bookPackage" required>
-              <option>Bible Study Session</option>
-              <option>Book Club Session</option>
-              <option>Weekend Homework Support</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label>Date (provider's calendar, East Africa Time)</label>
-            <input type="date" id="bookDate" required>
-          </div>
-          <div class="field-group">
-            <label>Time (East Africa Time, UTC+3)</label>
-            <input type="time" id="bookTime" required>
-          </div>
-          <div class="tz-display">
-            <div class="tz-row"><span class="lbl">Your detected time zone</span><span class="val" id="detectedTz">—</span></div>
-            <div id="tzOutput"></div>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:18px;">📅 Confirm Booking</button>
-        </form>
-      </div>
+<section class="pricing" id="pricing"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Pricing</div><h2>Straightforward pricing, in Ugandan Shillings.</h2><p>Our core plan bundles transit and after-school activities. Term-time and holiday programs are priced separately, so you only pay for what your child uses.</p></div><div class="fx-note">International clients: USD amounts are indicative (≈ 3,800 UGX / $1) and confirmed at checkout.</div><div class="price-cols"><div class="ticket reveal"><div class="ticket-head"><h3>Pick-up, Drop & After-School Club</h3><span class="mono">CORE PLAN</span></div><div class="ticket-body"><div class="ticket-row"><div class="plan">Daily</div><div class="desc">Pick-up, drop-off & after-school activities</div><div class="amt" data-ugx="75000">75,000<small>UGX / day</small><span class="usd-line"></span></div></div><div class="ticket-row"><div class="plan">Weekly</div><div class="desc">Full week transport & after-school activities</div><div class="amt" data-ugx="450000">450,000<small>UGX / week</small><span class="usd-line"></span></div></div><div class="ticket-row"><div class="plan">Monthly</div><div class="desc">Full month transport + activities + weekend studies</div><div class="amt" data-ugx="2500000">2,500,000<small>UGX / month</small><span class="usd-line"></span></div></div></div></div><div class="side-stack"><div class="session-card reveal"><h4>Routine Term-Time Sessions</h4><div class="session-item" data-ugx="100000"><span>Bible Study Session</span><span class="amt">100,000 UGX<span class="usd-line"></span></span></div><div class="session-item" data-ugx="100000"><span>Book Club Session</span><span class="amt">100,000 UGX<span class="usd-line"></span></span></div><div class="session-item" data-ugx="75000"><span>Weekend Homework Support</span><span class="amt">75,000 UGX<span class="usd-line"></span></span></div></div><div class="session-card reveal"><h4>Premium Holiday Programs</h4><table class="holiday-table"><thead><tr><th>Program</th><th>Daily</th><th>Weekly</th><th>Monthly</th></tr></thead><tbody><tr><td>School Progress Study<br><span>Academic revision & growth</span></td><td class="amt">75,000</td><td class="amt">350,000</td><td class="amt">1,450,000</td></tr><tr><td>Enrichment Duo<br><span>Bible Study + Book Club</span></td><td class="amt">-</td><td class="amt">400,000</td><td class="amt">1,550,000</td></tr></tbody></table></div></div></div></div></section>
 
-      <div class="reveal">
-        <h3 style="margin-bottom:16px;">Upcoming sessions</h3>
-        <div class="booking-list" id="bookingList"></div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="portal" id="portal"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Your Account</div><h2>The Parent Portal - everything in one place.</h2><p>See your children's active packages, jump straight into a live online class, and check your payment history - all without leaving this page.</p></div><div class="auth-shell reveal" id="portalLogin"><div class="auth-tabs"><div class="auth-tab active" data-mode="signin">Sign In</div><div class="auth-tab" data-mode="signup">Create Account</div></div><div class="auth-error" id="portalAuthError"></div><div class="auth-success" id="portalAuthSuccess"></div><form id="portalAuthForm"><input type="text" id="portalFullName" placeholder="Full name" style="display:none;"><input type="tel" id="portalPhone" placeholder="Phone number (optional)" style="display:none;"><input type="email" id="portalEmail" placeholder="Email" required autocomplete="username"><input type="password" id="portalPassword" placeholder="Password" autocomplete="current-password"><button type="submit" class="btn btn-primary form-btn" id="portalAuthSubmit">Sign In</button></form><div class="auth-mode-toggle"><button type="button" id="portalUsePassword" class="active">Use password</button><span>·</span><button type="button" id="portalUseMagicLink">Email me a sign-in link instead</button></div></div><div id="portalSignedIn" style="display:none;"><div class="signed-in-bar"><span id="portalGreeting"></span><button type="button" id="portalSignOutBtn">Sign out</button></div><div class="portal-grid reveal" id="portalDashboard"><div class="portal-panel"><h4>Active Roster</h4><div class="roster-mini" id="portalRoster"></div><form id="addChildForm" class="stack-form"><input type="text" id="newChildName" placeholder="Child's full name" required><input type="number" id="newChildAge" min="1" max="18" placeholder="Age"><input type="text" id="newChildNotes" placeholder="Allergies / special needs (optional)"><button type="submit" class="btn btn-ghost btn-sm">Add child</button></form></div><div class="portal-panel"><h4>Virtual Classroom</h4><p>No upcoming session</p><button class="classroom-btn" id="classroomBtn" disabled>No upcoming session</button></div><div class="portal-panel"><h4>Payment History</h4><div id="portalLedger"></div></div></div></div></div></section>
 
-<!-- ============ PRICING ============ -->
-<section class="pricing" id="pricing">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Pricing</div>
-      <h2>Pricing</h2>
-      <p>Our core plan bundles transit and after-school activities. Term-time and holiday programs are priced separately, so you only pay for what your child uses.</p>
-    </div>
+<section class="faq" id="faq"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Good to Know</div><h2>Frequently asked questions.</h2></div><div class="faq-list"><div class="faq-item reveal open"><div class="faq-q"><h4>Can I combine transit with enrichment sessions?</h4><span class="plus">+</span></div><div class="faq-a"><p>Yes - that's exactly how Little Stars works. Choose a core transit & after-school plan, then add Bible Study, Book Club or Homework Support sessions on top. Use the package builder above to see pricing in real time.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>Whose car is used for the school run?</h4><span class="plus">+</span></div><div class="faq-a"><p>You choose. "School Run (Client Car)" uses your own family vehicle with our trained staff handling pick-up and drop-off. "School Run (Provider Car)" uses our vehicle for the full transit service.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>What happens during the holidays?</h4><span class="plus">+</span></div><div class="faq-a"><p>Our Premium Holiday Programs keep your child engaged during school breaks - choose School Progress Study for academic revision, or the Enrichment Duo for Bible Study and Book Club together, on daily, weekly or monthly rates.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>Is the Bible Study and spiritual content optional?</h4><span class="plus">+</span></div><div class="faq-a"><p>Completely. Home Bible Study is one module among several - Transit, Academic Support, Life Skills and Spiritual Growth are all selected independently, so your package reflects your family's preferences.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>How do I get started?</h4><span class="plus">+</span></div><div class="faq-a"><p>Message us on WhatsApp or call either of our lines below. We'll talk through your child's school, schedule and needs, complete a short intake form, and confirm your final package and pricing.</p></div></div></div></div></section>
 
-    <div class="fx-note">International clients: USD amounts are indicative (≈ 3,800 UGX / $1) and confirmed at checkout.</div>
+<section class="finalcta"><div class="wrap"><h2>Customize your child's perfect care package today.</h2><p>One conversation is all it takes - tell us your child's school, schedule and interests, and we'll build the package around them.</p><div class="ctas"><a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-dark" target="_blank" rel="noopener">WhatsApp +256 704 383 497</a><a href="tel:+256704383497" class="btn btn-ghost">Call Now</a><a href="mailto:aminahdaisy141@gmail.com" class="btn btn-ghost">Email Us</a></div></div></section>
 
-    <div class="price-cols">
-      <div class="ticket reveal">
-        <div class="ticket-head"><h3>Pick-up, Drop &amp; After-School Club</h3><span class="mono">CORE PLAN</span></div>
-        <div class="ticket-body">
-          <div class="ticket-row"><div class="plan">Daily</div><div class="desc">Pick-up, drop-off &amp; after-school activities</div><div class="amt" data-ugx="75000">75,000<small>UGX / day</small><span class="usd-line"></span></div></div>
-          <div class="ticket-row"><div class="plan">Weekly</div><div class="desc">Full week transport &amp; after-school activities</div><div class="amt" data-ugx="450000">450,000<small>UGX / week</small><span class="usd-line"></span></div></div>
-          <div class="ticket-row"><div class="plan">Monthly</div><div class="desc">Full month transport + activities + weekend studies</div><div class="amt" data-ugx="2500000">2,500,000<small>UGX / month</small><span class="usd-line"></span></div></div>
-        </div>
-      </div>
-
-      <div class="side-stack">
-        <div class="session-card reveal">
-          <h4>Routine Term-Time Sessions</h4>
-          <div class="session-item" data-ugx="100000"><span>Bible Study Session</span><span class="amt">100,000 UGX<span class="usd-line"></span></span></div>
-          <div class="session-item" data-ugx="100000"><span>Book Club Session</span><span class="amt">100,000 UGX<span class="usd-line"></span></span></div>
-          <div class="session-item" data-ugx="75000"><span>Weekend Homework Support</span><span class="amt">75,000 UGX<span class="usd-line"></span></span></div>
-        </div>
-
-        <div class="session-card reveal">
-          <h4>Premium Holiday Programs</h4>
-          <table class="holiday-table">
-            <thead><tr><th>Program</th><th>Daily</th><th>Weekly</th><th>Monthly</th></tr></thead>
-            <tbody>
-              <tr><td>School Progress Study<br><span style="color:#8E80A8; font-size:12px;">Academic revision &amp; growth</span></td><td class="amt">75,000</td><td class="amt">350,000</td><td class="amt">1,450,000</td></tr>
-              <tr><td>Enrichment Duo<br><span style="color:#8E80A8; font-size:12px;">Bible Study + Book Club</span></td><td class="amt">—</td><td class="amt">400,000</td><td class="amt">1,550,000</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PARENT PORTAL ============ -->
-<section class="portal" id="portal">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Your Account</div>
-      <h2>The Parent Portal — everything in one place.</h2>
-      <p>See your children's active packages, jump straight into a live online class, and check your payment history — all without leaving this page.</p>
-    </div>
-
-    <!-- Real auth: email/password or magic link. Shown only when signed out. -->
-    <div class="auth-shell reveal" id="portalLogin">
-      <div class="auth-tabs">
-        <div class="auth-tab active" data-mode="signin">Sign In</div>
-        <div class="auth-tab" data-mode="signup">Create Account</div>
-      </div>
-
-      <div class="auth-error" id="portalAuthError"></div>
-      <div class="auth-success" id="portalAuthSuccess"></div>
-
-      <form id="portalAuthForm">
-        <input type="text" id="portalFullName" placeholder="Full name" style="display:none;">
-        <input type="email" id="portalEmail" placeholder="Email" required autocomplete="username">
-        <input type="password" id="portalPassword" placeholder="Password" autocomplete="current-password">
-        <button type="submit" class="btn btn-primary" style="width:100%;" id="portalAuthSubmit">Sign In</button>
-      </form>
-
-      <div class="auth-mode-toggle">
-        <button type="button" id="portalUsePassword" class="active">Use password</button>
-        <span style="color:rgba(255,255,255,0.3);">·</span>
-        <button type="button" id="portalUseMagicLink">Email me a sign-in link instead</button>
-      </div>
-    </div>
-
-    <!-- Signed-in dashboard. Hidden until a real session + profile load succeeds. -->
-    <div id="portalSignedIn" style="display:none;">
-      <div class="signed-in-bar">
-        <span id="portalGreeting"></span>
-        <button type="button" id="portalSignOutBtn">Sign out</button>
-      </div>
-      <div class="portal-grid reveal" id="portalDashboard">
-        <div class="portal-panel">
-          <h4>👧 Active Roster</h4>
-          <div class="roster-mini" id="portalRoster"></div>
-          <form id="addChildForm" style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
-            <input type="text" id="newChildName" placeholder="Child's full name" required>
-            <input type="number" id="newChildAge" min="1" max="18" placeholder="Age">
-            <input type="text" id="newChildNotes" placeholder="Allergies / special needs (optional)">
-            <button type="submit" class="btn btn-ghost btn-sm">➕ Add child</button>
-          </form>
-        </div>
-        <div class="portal-panel">
-          <h4>🎥 Virtual Classroom</h4>
-          <p style="font-size:12.5px; color:rgba(255,255,255,0.6); margin-bottom:10px;">Your next live online session, ready to join.</p>
-          <button class="classroom-btn" id="classroomBtn" disabled>No upcoming session</button>
-        </div>
-        <div class="portal-panel">
-          <h4>🧾 Payment History</h4>
-          <div id="portalLedger"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="faq" id="faq">
-  <div class="wrap">
-    <div class="section-head reveal"><div class="eyebrow">Good to Know</div><h2>Frequently asked questions.</h2></div>
-    <div class="faq-list">
-      <div class="faq-item reveal open">
-        <div class="faq-q"><h4>Can I combine transit with enrichment sessions?</h4><span class="plus">+</span></div>
-        <div class="faq-a"><p>Yes — that's exactly how Little Stars works. Choose a core transit &amp; after-school plan, then add Bible Study, Book Club or Homework Support sessions on top. Use the package builder above to see pricing in real time.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q"><h4>Whose car is used for the school run?</h4><span class="plus">+</span></div>
-        <div class="faq-a"><p>You choose. "School Run (Client Car)" uses your own family vehicle with our trained staff handling pick-up and drop-off. "School Run (Provider Car)" uses our vehicle for the full transit service.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q"><h4>What happens during the holidays?</h4><span class="plus">+</span></div>
-        <div class="faq-a"><p>Our Premium Holiday Programs keep your child engaged during school breaks — choose School Progress Study for academic revision, or the Enrichment Duo for Bible Study and Book Club together, on daily, weekly or monthly rates.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q"><h4>Is the Bible Study and spiritual content optional?</h4><span class="plus">+</span></div>
-        <div class="faq-a"><p>Completely. Home Bible Study is one module among several — Transit, Academic Support, Life Skills and Spiritual Growth are all selected independently, so your package reflects your family's preferences.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q"><h4>How do I get started?</h4><span class="plus">+</span></div>
-        <div class="faq-a"><p>Message us on WhatsApp or call either of our lines below. We'll talk through your child's school, schedule and needs, complete a short intake form, and confirm your final package and pricing.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FINAL CTA ============ -->
-<section class="finalcta">
-  <div class="wrap">
-    <h2>Customize your child's perfect care package today.</h2>
-    <p>One conversation is all it takes — tell us your child's school, schedule and interests, and we'll build the package around them.</p>
-    <div class="ctas">
-      <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-dark" target="_blank" rel="noopener">💬 WhatsApp +256 704 383 497</a>
-      <a href="tel:+256704383497" class="btn btn-ghost" style="border-color:rgba(255,255,255,0.6);">📞 Call Now</a>
-      <a href="mailto:aminahdaisy141@gmail.com" class="btn btn-ghost" style="border-color:rgba(255,255,255,0.6);">✉️ Email Us</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <a href="#top" class="logo" style="color:#fff;"><span class="star">✦</span> Little Stars Enrichment</a>
-        <p>Build your child's bright future — safe transit and personalised development, all in one package, in Kampala.</p>
-        <div class="social-row">
-          <a href="https://wa.me/256704383497" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-          <a href="https://www.tiktok.com/@littlestarsenrichment" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M168.5 16h-35.7v153.6c0 18.9-15.3 34.4-34.4 34.4-19 0-34.4-15.5-34.4-34.4 0-18.6 15-33.9 33.5-34.4v-36.1c-39.1.5-70.6 32.3-70.6 70.5 0 38.9 31.6 70.5 70.5 70.5s70.5-31.6 70.5-70.5V99.3c13.6 9.8 30.3 15.6 48.3 15.6V79.1c-26.6 0-47.7-21.6-47.7-47.9V16Z"/></svg>
-          </a>
-          <a href="mailto:aminahdaisy141@gmail.com" aria-label="Email">✉️</a>
-        </div>
-      </div>
-      <div>
-        <h5>Explore</h5>
-        <a href="#stops">Services</a>
-        <a href="#builder">Build a Package</a>
-        <a href="#booking">Book a Session</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#portal">Parent Portal</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div>
-        <h5>Services</h5>
-        <a href="#stops">Transit Services</a>
-        <a href="#stops">Academic Support</a>
-        <a href="#stops">Life Skills &amp; Culture</a>
-        <a href="#stops">Spiritual Growth</a>
-      </div>
-      <div>
-        <h5>Contact</h5>
-        <div class="row mono">0704 383 497</div>
-        <div class="row mono">0706 017 601</div>
-        <a href="mailto:aminahdaisy141@gmail.com">aminahdaisy141@gmail.com</a>
-        <a href="https://wa.me/256704383497" target="_blank" rel="noopener">WhatsApp Chat</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 Little Stars Enrichment, Kampala. All rights reserved.</span>
-      <span>Final Stop 🌟 — thanks for riding with us.</span>
-    </div>
-  </div>
-</footer>
+<footer><div class="wrap"><div class="foot-grid"><div class="foot-brand"><a href="#top" class="logo"><span class="logo-mark">LS</span><span>Little Stars<br><small>Enrichment</small></span></a><p>Build your child's bright future - safe transit and personalised development, all in one package, in Kampala.</p></div><div><h5>Explore</h5><a href="#stops">Services</a><a href="#builder">Build a Package</a><a href="#booking">Book a Session</a><a href="#pricing">Pricing</a><a href="#portal">Parent Portal</a><a href="#faq">FAQ</a></div><div><h5>Services</h5><a href="#stops">Transit Services</a><a href="#stops">Academic Support</a><a href="#stops">Life Skills & Culture</a><a href="#stops">Spiritual Growth</a></div><div><h5>Contact</h5><div class="row mono">0704 383 497</div><div class="row mono">0706 017 601</div><a href="mailto:aminahdaisy141@gmail.com">aminahdaisy141@gmail.com</a><a href="https://wa.me/256704383497" target="_blank" rel="noopener">WhatsApp Chat</a></div></div><div class="foot-bottom"><span>© 2026 Little Stars Enrichment, Kampala. All rights reserved.</span><span>Final Stop 🌟 - thanks for riding with us.</span></div></div></footer>
 
 <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="float-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+<button class="chat-toggle" id="chatToggle" aria-label="Chat with us">💬<span class="badge">1</span></button>
+<div class="chat-window" id="chatWindow"><div class="chat-head"><div><div class="ti">Chat with Little Stars</div><div class="sub">We usually reply in a few minutes</div></div><span class="x" id="chatClose">×</span></div><div class="chat-body" id="chatBody"></div><div class="chat-name-row"><input type="text" id="chatName" placeholder="Your name"></div><div class="chat-input-row"><input type="text" id="chatInput" placeholder="Type a message..."><button id="chatSend" aria-label="Send">➤</button></div></div>
 
-<!-- ============ LIVE CHAT WIDGET ============ -->
-<button class="chat-toggle" id="chatToggle" aria-label="Chat with us">🗨️<span class="badge">1</span></button>
-<div class="chat-window" id="chatWindow">
-  <div class="chat-head">
-    <div>
-      <div class="ti">Chat with Little Stars</div>
-      <div class="sub">We usually reply in a few minutes</div>
-    </div>
-    <span class="x" id="chatClose">✕</span>
-  </div>
-  <div class="chat-body" id="chatBody"></div>
-  <div style="padding:8px 12px 0; border-top:1px solid rgba(142,95,214,0.1);">
-    <input type="text" id="chatName" placeholder="Your name" style="width:100%; border:1px solid rgba(142,95,214,0.2); border-radius:8px; padding:7px 10px; font-size:12.5px; margin-bottom:8px;">
-  </div>
-  <div class="chat-input-row">
-    <input type="text" id="chatInput" placeholder="Type a message…">
-    <button id="chatSend" aria-label="Send">➤</button>
-  </div>
-</div>
-
-<script src="config.js"></script>
-<script src="data.js"></script>
-<script src="auth.js"></script>
-<script src="app.js"></script>
+<script src="config.js"></script><script src="data.js"></script><script src="auth.js"></script><script src="app.js"></script>
 </body>
 </html>

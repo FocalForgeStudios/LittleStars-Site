@@ -612,3 +612,42 @@ if (addChildForm) {
   sendBtn.addEventListener('click', send);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
 })();
+/* ===================================================================
+   REDESIGN MOTION LAYER - copy-only enhancement for LittleStars Site Redesign
+   =================================================================== */
+(function setupRedesignMotion(){
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const heroStage = document.querySelector('.hero-stage');
+  const heroImg = document.querySelector('.hero-main-img');
+  const floatCards = document.querySelectorAll('.floating-card');
+
+  if (heroStage && heroImg) {
+    heroStage.addEventListener('mousemove', (event) => {
+      const rect = heroStage.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      heroImg.style.transform = `translate3d(${x * -10}px, ${y * -8}px, 0) rotate(${x * 1.2}deg)`;
+      floatCards.forEach((card, index) => {
+        const depth = index === 0 ? 16 : -13;
+        card.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
+      });
+    });
+    heroStage.addEventListener('mouseleave', () => {
+      heroImg.style.transform = '';
+      floatCards.forEach(card => { card.style.transform = ''; });
+    });
+  }
+
+  const animatedCards = document.querySelectorAll('.stop-card, .booking-card, .ticket, .session-card, .portal-panel');
+  animatedCards.forEach(card => {
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      card.style.setProperty('--mx', `${x}px`);
+      card.style.setProperty('--my', `${y}px`);
+    });
+  });
+})();

@@ -14,6 +14,7 @@ const portalAuthForm = document.getElementById('portalAuthForm');
 const portalAuthError = document.getElementById('portalAuthError');
 const portalAuthSuccess = document.getElementById('portalAuthSuccess');
 const portalFullNameInput = document.getElementById('portalFullName');
+const portalPhoneInput = document.getElementById('portalPhone');
 const portalEmailInput = document.getElementById('portalEmail');
 const portalPasswordInput = document.getElementById('portalPassword');
 const portalAuthSubmit = document.getElementById('portalAuthSubmit');
@@ -30,6 +31,8 @@ function updateAuthFormUI() {
   clearAuthMessages();
   portalFullNameInput.style.display = authMode === 'signup' ? 'block' : 'none';
   portalFullNameInput.required = authMode === 'signup';
+  // Phone is optional even on signup — Andrew wanted it available but never mandatory.
+  portalPhoneInput.style.display = authMode === 'signup' ? 'block' : 'none';
   portalPasswordInput.style.display = useMagicLink ? 'none' : 'block';
   portalPasswordInput.required = !useMagicLink;
   if (useMagicLink) {
@@ -67,6 +70,7 @@ portalAuthForm.addEventListener('submit', async (e) => {
   const email = portalEmailInput.value.trim();
   const password = portalPasswordInput.value;
   const fullName = portalFullNameInput.value.trim();
+  const phone = portalPhoneInput.value.trim();
 
   portalAuthSubmit.disabled = true;
   const originalText = portalAuthSubmit.textContent;
@@ -82,7 +86,7 @@ portalAuthForm.addEventListener('submit', async (e) => {
     }
     if (authMode === 'signup') {
       if (!fullName) { throw new Error('Please enter your full name.'); }
-      const { error } = await LSData.signUpWithPassword(email, password, fullName);
+      const { error } = await LSData.signUpWithPassword(email, password, fullName, phone);
       if (error) throw error;
       portalAuthSuccess.textContent = 'Account created! If email confirmation is on, check your inbox — otherwise you\'re signed in now.';
       portalAuthSuccess.classList.add('show');
