@@ -558,12 +558,13 @@ if (addChildForm) {
 
   let currentThread = null;
   let unsubscribe = null;
+  let isSignedIn = false;
 
   function escapeHTML(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
   function renderMessages() {
     if (!currentThread) {
-      body.innerHTML = `<div class="bubble them">Hi! Please sign in to the Parent Portal below first — that way our team always knows who they're chatting with. 🙂</div>`;
+      body.innerHTML = `<div class="bubble them">Hi! Type your name above and send your first message — we usually reply within a few minutes. 👋</div>`;
       return;
     }
     body.innerHTML = currentThread.messages.map(m => `
@@ -574,24 +575,42 @@ if (addChildForm) {
     body.scrollTop = body.scrollHeight;
   }
 
-  async function loadThreadIfSignedIn() {
+  // Signed-in parents: identity locked to their account, thread persists.
+  // Anonymous guests: name field stays editable; a thread is created the
+  // moment they send their first message (so we don't create empty threads
+  // for every visitor who opens the chat bubble out of curiosity).
+  async function refreshSignInState() {
     const session = await LSData.getSession();
-    if (!session) { currentThread = null; if (unsubscribe) { unsubscribe(); unsubscribe = null; } renderMessages(); return; }
-    const profile = await LSData.getProfile();
-    nameField.value = profile?.full_name || session.user.email || '';
-    nameField.disabled = true; // identity now comes from the account, not free text
-    currentThread = await LSData.getOrCreateThread();
-    if (currentThread && !unsubscribe) {
-      unsubscribe = LSData.subscribeToThread(currentThread.id, (msg) => {
-        currentThread.messages.push({ sender: msg.sender, text: msg.text, time: new Date(msg.created_at).getTime() });
-        renderMessages();
-      });
+    isSignedIn = !!session;
+
+    if (isSignedIn) {
+      const profile = await LSData.getProfile();
+      nameField.value = profile?.full_name || session.user.email || '';
+      nameField.disabled = true;
+      // Load the existing thread (or create one silently in the background).
+      if (!currentThread) {
+        currentThread = await LSData.getOrCreateThread();
+        if (currentThread && !unsubscribe) {
+          unsubscribe = LSData.subscribeToThread(currentThread.id, (msg) => {
+            currentThread.messages.push({ sender: msg.sender, text: msg.text, time: new Date(msg.created_at).getTime() });
+            renderMessages();
+          });
+        }
+      }
+    } else {
+      // Signed out — clear the thread so the previous parent's messages
+      // don't show, and re-enable the name field for the next guest.
+      currentThread = null;
+      if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+      nameField.disabled = false;
+      nameField.value = '';
     }
+
     renderMessages();
   }
 
-  document.addEventListener('lse:authChanged', loadThreadIfSignedIn);
-  loadThreadIfSignedIn();
+  document.addEventListener('lse:authChanged', refreshSignInState);
+  refreshSignInState();
 
   toggle.addEventListener('click', () => {
     win.classList.toggle('open');
@@ -602,7 +621,27 @@ if (addChildForm) {
   async function send() {
     const text = input.value.trim();
     if (!text) return;
-    if (!currentThread) { alert('Please sign in to the Parent Portal first so we know who\'s messaging.'); return; }
+
+    // For anonymous guests, create their thread lazily on first send.
+    if (!currentThread) {
+      const guestName = nameField.value.trim();
+      if (!guestName) {
+        nameField.focus();
+        nameField.style.borderColor = '#e05';
+        setTimeout(() => nameField.style.borderColor = '', 1800);
+        return;
+      }
+      currentThread = await LSData.getOrCreateThread(guestName);
+      if (!currentThread) { alert('Could not start the conversation — please try again.'); return; }
+      // Subscribe for live replies even in guest mode.
+      if (!unsubscribe) {
+        unsubscribe = LSData.subscribeToThread(currentThread.id, (msg) => {
+          currentThread.messages.push({ sender: msg.sender, text: msg.text, time: new Date(msg.created_at).getTime() });
+          renderMessages();
+        });
+      }
+    }
+
     input.value = '';
     const { error } = await LSData.pushMessage(currentThread.id, 'parent', text);
     if (error) { alert('Message failed to send: ' + error.message); return; }
@@ -612,6 +651,7 @@ if (addChildForm) {
   sendBtn.addEventListener('click', send);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
 })();
+
 /* ===================================================================
    REDESIGN MOTION LAYER - copy-only enhancement for LittleStars Site Redesign
    =================================================================== */
