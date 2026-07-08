@@ -1,11 +1,14 @@
 /* =====================================================================
-   auth.js — Parent Portal authentication
+   auth.js — Parent Portal authentication (PUBLIC SITE)
 
-   Handles the Sign In / Create Account tabs and the password / magic
-   link toggle, then dispatches 'lse:authChanged' whenever the signed-in
-   state changes so app.js can render (or tear down) the portal
-   dashboard without this file needing to know anything about rosters,
-   bookings, etc.
+   Three fixes applied in this version:
+   1. Sign-out now clears all form fields so old credentials never linger.
+   2. After a successful sign-in, we check the profile role — if the
+      account is a provider, they're signed out immediately with a clear
+      message: this portal is for parents only, they should use the
+      admin dashboard instead.
+   3. Password / magic-link toggle and Sign In / Create Account tabs
+      all still work exactly as before.
    ===================================================================== */
 
 const portalLoginEl = document.getElementById('portalLogin');
@@ -19,7 +22,7 @@ const portalEmailInput = document.getElementById('portalEmail');
 const portalPasswordInput = document.getElementById('portalPassword');
 const portalAuthSubmit = document.getElementById('portalAuthSubmit');
 
-let authMode = 'signin';     // 'signin' | 'signup'
+let authMode = 'signin';
 let useMagicLink = false;
 
 function clearAuthMessages() {
@@ -27,12 +30,22 @@ function clearAuthMessages() {
   portalAuthSuccess.classList.remove('show'); portalAuthSuccess.textContent = '';
 }
 
+// Clears every input in the auth form so credentials never linger after
+// sign-out. Called any time the portal transitions back to the logged-out
+// state, regardless of how sign-out happened.
+function clearAuthFields() {
+  portalEmailInput.value = '';
+  portalPasswordInput.value = '';
+  portalFullNameInput.value = '';
+  if (portalPhoneInput) portalPhoneInput.value = '';
+  clearAuthMessages();
+}
+
 function updateAuthFormUI() {
   clearAuthMessages();
   portalFullNameInput.style.display = authMode === 'signup' ? 'block' : 'none';
   portalFullNameInput.required = authMode === 'signup';
-  // Phone is optional even on signup — Andrew wanted it available but never mandatory.
-  portalPhoneInput.style.display = authMode === 'signup' ? 'block' : 'none';
+  if (portalPhoneInput) portalPhoneInput.style.display = authMode === 'signup' ? 'block' : 'none';
   portalPasswordInput.style.display = useMagicLink ? 'none' : 'block';
   portalPasswordInput.required = !useMagicLink;
   if (useMagicLink) {
@@ -70,7 +83,7 @@ portalAuthForm.addEventListener('submit', async (e) => {
   const email = portalEmailInput.value.trim();
   const password = portalPasswordInput.value;
   const fullName = portalFullNameInput.value.trim();
-  const phone = portalPhoneInput.value.trim();
+  const phone = portalPhoneInput ? portalPhoneInput.value.trim() : '';
 
   portalAuthSubmit.disabled = true;
   const originalText = portalAuthSubmit.textContent;
@@ -85,10 +98,10 @@ portalAuthForm.addEventListener('submit', async (e) => {
       return;
     }
     if (authMode === 'signup') {
-      if (!fullName) { throw new Error('Please enter your full name.'); }
+      if (!fullName) throw new Error('Please enter your full name.');
       const { error } = await LSData.signUpWithPassword(email, password, fullName, phone);
       if (error) throw error;
-      portalAuthSuccess.textContent = 'Account created! If email confirmation is on, check your inbox — otherwise you\'re signed in now.';
+      portalAuthSuccess.textContent = 'Account created! If email confirmation is on, check your inbox.';
       portalAuthSuccess.classList.add('show');
       await routeAuthState();
     } else {
@@ -107,24 +120,46 @@ portalAuthForm.addEventListener('submit', async (e) => {
 
 document.getElementById('portalSignOutBtn').addEventListener('click', async () => {
   await LSData.signOut();
+  clearAuthFields();
   await routeAuthState();
 });
 
-// ---------- routing: show login box or dashboard based on real session ----------
+// ---------- routing: show login box or signed-in dashboard ----------
 async function routeAuthState() {
   const session = await LSData.getSession();
+
   if (session) {
+    // Block providers from using the parent portal — they have their own
+    // admin dashboard for everything, and mixing the two would let a
+    // provider see parent-only UI and create confusing data.
+    const profile = await LSData.getProfile();
+    if (profile && profile.role === 'provider') {
+      await LSData.signOut();
+      clearAuthFields();
+      portalLoginEl.style.display = 'block';
+      portalSignedInEl.style.display = 'none';
+      portalAuthError.textContent =
+        'This account is a provider account. Please use the Little Stars provider dashboard to sign in. ' +
+        'The parent portal is for families only.';
+      portalAuthError.classList.add('show');
+      document.dispatchEvent(new CustomEvent('lse:authChanged', { detail: { signedIn: false } }));
+      return;
+    }
+
     portalLoginEl.style.display = 'none';
     portalSignedInEl.style.display = 'block';
   } else {
+    // Signed out — make sure the form is clean for the next person.
+    clearAuthFields();
     portalLoginEl.style.display = 'block';
     portalSignedInEl.style.display = 'none';
   }
+
   document.dispatchEvent(new CustomEvent('lse:authChanged', { detail: { signedIn: !!session } }));
 }
 
 updateAuthFormUI();
 routeAuthState();
 
-// Keep the portal in sync if the user signs in/out via a magic-link redirect in another tab.
+// Keep the portal in sync when a magic-link redirect fires in another tab.
 supabase.auth.onAuthStateChange(() => { routeAuthState(); });
