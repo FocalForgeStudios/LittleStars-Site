@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 <script src="https://unpkg.com/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -114,11 +115,210 @@
 
 <section class="portal" id="portal"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Your Account</div><h2>The Parent Portal - everything in one place.</h2><p>See your children's active packages, jump straight into a live online class, and check your payment history - all without leaving this page.</p></div><div class="auth-shell reveal" id="portalLogin"><div class="auth-tabs"><div class="auth-tab active" data-mode="signin">Sign In</div><div class="auth-tab" data-mode="signup">Create Account</div></div><div class="auth-error" id="portalAuthError"></div><div class="auth-success" id="portalAuthSuccess"></div><form id="portalAuthForm"><input type="text" id="portalFullName" placeholder="Full name" style="display:none;"><input type="tel" id="portalPhone" placeholder="Phone number (optional)" style="display:none;"><input type="email" id="portalEmail" placeholder="Email" required autocomplete="username"><input type="password" id="portalPassword" placeholder="Password" autocomplete="current-password"><button type="submit" class="btn btn-primary form-btn" id="portalAuthSubmit">Sign In</button></form><div class="auth-mode-toggle"><button type="button" id="portalUsePassword" class="active">Use password</button><span>·</span><button type="button" id="portalUseMagicLink">Email me a sign-in link instead</button></div></div><div id="portalSignedIn" style="display:none;"><div class="signed-in-bar"><span id="portalGreeting"></span><button type="button" id="portalSignOutBtn">Sign out</button></div><div class="portal-grid reveal" id="portalDashboard"><div class="portal-panel"><h4>Active Roster</h4><div class="roster-mini" id="portalRoster"></div><form id="addChildForm" class="stack-form"><input type="text" id="newChildName" placeholder="Child's full name" required><input type="number" id="newChildAge" min="1" max="18" placeholder="Age"><input type="text" id="newChildNotes" placeholder="Allergies / special needs (optional)"><button type="submit" class="btn btn-ghost btn-sm">Add child</button></form></div><div class="portal-panel"><h4>Virtual Classroom</h4><p>No upcoming session</p><button class="classroom-btn" id="classroomBtn" disabled>No upcoming session</button></div><div class="portal-panel"><h4>Payment History</h4><div id="portalLedger"></div></div></div></div></div></section>
 
+<<<<<<< HEAD
 <section class="faq" id="faq"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Good to Know</div><h2>Frequently asked questions.</h2></div><div class="faq-list"><div class="faq-item reveal open"><div class="faq-q"><h4>Can I combine transit with enrichment sessions?</h4><span class="plus">+</span></div><div class="faq-a"><p>Yes - that's exactly how Little Stars works. Choose a core transit & after-school plan, then add Bible Study, Book Club or Homework Support sessions on top. Use the package builder above to see pricing in real time.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>Whose car is used for the school run?</h4><span class="plus">+</span></div><div class="faq-a"><p>You choose. "School Run (Client Car)" uses your own family vehicle with our trained staff handling pick-up and drop-off. "School Run (Provider Car)" uses our vehicle for the full transit service.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>What happens during the holidays?</h4><span class="plus">+</span></div><div class="faq-a"><p>Our Premium Holiday Programs keep your child engaged during school breaks - choose School Progress Study for academic revision, or the Enrichment Duo for Bible Study and Book Club together, on daily, weekly or monthly rates.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>Is the Bible Study and spiritual content optional?</h4><span class="plus">+</span></div><div class="faq-a"><p>Completely. Home Bible Study is one module among several - Transit, Academic Support, Life Skills and Spiritual Growth are all selected independently, so your package reflects your family's preferences.</p></div></div><div class="faq-item reveal"><div class="faq-q"><h4>How do I get started?</h4><span class="plus">+</span></div><div class="faq-a"><p>Message us on WhatsApp or call either of our lines below. We'll talk through your child's school, schedule and needs, complete a short intake form, and confirm your final package and pricing.</p></div></div></div></div></section>
+=======
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2>Straightforward pricing, in Ugandan Shillings.</h2>
+      <p>Our core plan bundles transit and after-school activities. Term-time and holiday programs are priced separately, so you only pay for what your child uses.</p>
+    </div>
+>>>>>>> ce76cae315c78642ba7957ce1fe626b12854b9e2
 
 <section class="finalcta"><div class="wrap"><h2>Customize your child's perfect care package today.</h2><p>One conversation is all it takes - tell us your child's school, schedule and interests, and we'll build the package around them.</p><div class="ctas"><a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-dark" target="_blank" rel="noopener">WhatsApp +256 704 383 497</a><a href="tel:+256704383497" class="btn btn-ghost">Call Now</a><a href="mailto:aminahdaisy141@gmail.com" class="btn btn-ghost">Email Us</a></div></div></section>
 
+<<<<<<< HEAD
 <footer><div class="wrap"><div class="foot-grid"><div class="foot-brand"><a href="#top" class="logo"><span class="logo-mark">LS</span><span>Little Stars<br><small>Enrichment</small></span></a><p>Build your child's bright future - safe transit and personalised development, all in one package, in Kampala.</p></div><div><h5>Explore</h5><a href="#stops">Services</a><a href="#builder">Build a Package</a><a href="#booking">Book a Session</a><a href="#pricing">Pricing</a><a href="#portal">Parent Portal</a><a href="#faq">FAQ</a></div><div><h5>Services</h5><a href="#stops">Transit Services</a><a href="#stops">Academic Support</a><a href="#stops">Life Skills & Culture</a><a href="#stops">Spiritual Growth</a></div><div><h5>Contact</h5><div class="row mono">0704 383 497</div><div class="row mono">0706 017 601</div><a href="mailto:aminahdaisy141@gmail.com">aminahdaisy141@gmail.com</a><a href="https://wa.me/256704383497" target="_blank" rel="noopener">WhatsApp Chat</a></div></div><div class="foot-bottom"><span>© 2026 Little Stars Enrichment, Kampala. All rights reserved.</span><span>Final Stop 🌟 - thanks for riding with us.</span></div></div></footer>
+=======
+    <div class="price-cols">
+      <div class="ticket reveal">
+        <div class="ticket-head"><h3>Pick-up, Drop &amp; After-School Club</h3><span class="mono">CORE PLAN</span></div>
+        <div class="ticket-body">
+          <div class="ticket-row"><div class="plan">Daily</div><div class="desc">Pick-up, drop-off &amp; after-school activities</div><div class="amt" data-ugx="75000">75,000<small>UGX / day</small><span class="usd-line"></span></div></div>
+          <div class="ticket-row"><div class="plan">Weekly</div><div class="desc">Full week transport &amp; after-school activities</div><div class="amt" data-ugx="450000">450,000<small>UGX / week</small><span class="usd-line"></span></div></div>
+          <div class="ticket-row"><div class="plan">Monthly</div><div class="desc">Full month transport + activities + weekend studies</div><div class="amt" data-ugx="2500000">2,500,000<small>UGX / month</small><span class="usd-line"></span></div></div>
+        </div>
+      </div>
+
+      <div class="side-stack">
+        <div class="session-card reveal">
+          <h4>Routine Term-Time Sessions</h4>
+          <div class="session-item" data-ugx="100000"><span>Bible Study Session</span><span class="amt">100,000 UGX<span class="usd-line"></span></span></div>
+          <div class="session-item" data-ugx="100000"><span>Book Club Session</span><span class="amt">100,000 UGX<span class="usd-line"></span></span></div>
+          <div class="session-item" data-ugx="75000"><span>Weekend Homework Support</span><span class="amt">75,000 UGX<span class="usd-line"></span></span></div>
+        </div>
+
+        <div class="session-card reveal">
+          <h4>Premium Holiday Programs</h4>
+          <table class="holiday-table">
+            <thead><tr><th>Program</th><th>Daily</th><th>Weekly</th><th>Monthly</th></tr></thead>
+            <tbody>
+              <tr><td>School Progress Study<br><span style="color:#8E80A8; font-size:12px;">Academic revision &amp; growth</span></td><td class="amt">75,000</td><td class="amt">350,000</td><td class="amt">1,450,000</td></tr>
+              <tr><td>Enrichment Duo<br><span style="color:#8E80A8; font-size:12px;">Bible Study + Book Club</span></td><td class="amt">—</td><td class="amt">400,000</td><td class="amt">1,550,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARENT PORTAL ============ -->
+<section class="portal" id="portal">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Your Account</div>
+      <h2>The Parent Portal — everything in one place.</h2>
+      <p>See your children's active packages, jump straight into a live online class, and check your payment history — all without leaving this page.</p>
+    </div>
+
+    <!-- Real auth: email/password or magic link. Shown only when signed out. -->
+    <div class="auth-shell reveal" id="portalLogin">
+      <div class="auth-tabs">
+        <div class="auth-tab active" data-mode="signin">Sign In</div>
+        <div class="auth-tab" data-mode="signup">Create Account</div>
+      </div>
+
+      <div class="auth-error" id="portalAuthError"></div>
+      <div class="auth-success" id="portalAuthSuccess"></div>
+
+      <form id="portalAuthForm">
+        <input type="text" id="portalFullName" placeholder="Full name" style="display:none;">
+        <input type="tel" id="portalPhone" placeholder="Phone number (optional)" style="display:none;">
+        <input type="email" id="portalEmail" placeholder="Email" required autocomplete="username">
+        <input type="password" id="portalPassword" placeholder="Password" autocomplete="current-password">
+        <button type="submit" class="btn btn-primary" style="width:100%;" id="portalAuthSubmit">Sign In</button>
+      </form>
+
+      <div class="auth-mode-toggle">
+        <button type="button" id="portalUsePassword" class="active">Use password</button>
+        <span style="color:rgba(255,255,255,0.3);">·</span>
+        <button type="button" id="portalUseMagicLink">Email me a sign-in link instead</button>
+      </div>
+    </div>
+
+    <!-- Signed-in dashboard. Hidden until a real session + profile load succeeds. -->
+    <div id="portalSignedIn" style="display:none;">
+      <div class="signed-in-bar">
+        <span id="portalGreeting"></span>
+        <button type="button" id="portalSignOutBtn">Sign out</button>
+      </div>
+      <div class="portal-grid reveal" id="portalDashboard">
+        <div class="portal-panel">
+          <h4>👧 Active Roster</h4>
+          <div class="roster-mini" id="portalRoster"></div>
+          <form id="addChildForm" style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
+            <input type="text" id="newChildName" placeholder="Child's full name" required>
+            <input type="number" id="newChildAge" min="1" max="18" placeholder="Age">
+            <input type="text" id="newChildNotes" placeholder="Allergies / special needs (optional)">
+            <button type="submit" class="btn btn-ghost btn-sm">➕ Add child</button>
+          </form>
+        </div>
+        <div class="portal-panel">
+          <h4>🎥 Virtual Classroom</h4>
+          <p style="font-size:12.5px; color:rgba(255,255,255,0.6); margin-bottom:10px;">Your next live online session, ready to join.</p>
+          <button class="classroom-btn" id="classroomBtn" disabled>No upcoming session</button>
+        </div>
+        <div class="portal-panel">
+          <h4>🧾 Payment History</h4>
+          <div id="portalLedger"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Good to Know</div><h2>Frequently asked questions.</h2></div>
+    <div class="faq-list">
+      <div class="faq-item reveal open">
+        <div class="faq-q"><h4>Can I combine transit with enrichment sessions?</h4><span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes — that's exactly how Little Stars works. Choose a core transit &amp; after-school plan, then add Bible Study, Book Club or Homework Support sessions on top. Use the package builder above to see pricing in real time.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><h4>Whose car is used for the school run?</h4><span class="plus">+</span></div>
+        <div class="faq-a"><p>You choose. "School Run (Client Car)" uses your own family vehicle with our trained staff handling pick-up and drop-off. "School Run (Provider Car)" uses our vehicle for the full transit service.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><h4>What happens during the holidays?</h4><span class="plus">+</span></div>
+        <div class="faq-a"><p>Our Premium Holiday Programs keep your child engaged during school breaks — choose School Progress Study for academic revision, or the Enrichment Duo for Bible Study and Book Club together, on daily, weekly or monthly rates.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><h4>Is the Bible Study and spiritual content optional?</h4><span class="plus">+</span></div>
+        <div class="faq-a"><p>Completely. Home Bible Study is one module among several — Transit, Academic Support, Life Skills and Spiritual Growth are all selected independently, so your package reflects your family's preferences.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><h4>How do I get started?</h4><span class="plus">+</span></div>
+        <div class="faq-a"><p>Message us on WhatsApp or call either of our lines below. We'll talk through your child's school, schedule and needs, complete a short intake form, and confirm your final package and pricing.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="finalcta">
+  <div class="wrap">
+    <h2>Customize your child's perfect care package today.</h2>
+    <p>One conversation is all it takes — tell us your child's school, schedule and interests, and we'll build the package around them.</p>
+    <div class="ctas">
+      <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="btn btn-dark" target="_blank" rel="noopener">💬 WhatsApp +256 704 383 497</a>
+      <a href="tel:+256704383497" class="btn btn-ghost" style="border-color:rgba(255,255,255,0.6);">📞 Call Now</a>
+      <a href="mailto:aminahdaisy141@gmail.com" class="btn btn-ghost" style="border-color:rgba(255,255,255,0.6);">✉️ Email Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo" style="color:#fff;"><span class="star">✦</span> Little Stars Enrichment</a>
+        <p>Build your child's bright future — safe transit and personalised development, all in one package, in Kampala.</p>
+        <div class="social-row">
+          <a href="https://wa.me/256704383497" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+          <a href="https://www.tiktok.com/@littlestarsenrichment" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M168.5 16h-35.7v153.6c0 18.9-15.3 34.4-34.4 34.4-19 0-34.4-15.5-34.4-34.4 0-18.6 15-33.9 33.5-34.4v-36.1c-39.1.5-70.6 32.3-70.6 70.5 0 38.9 31.6 70.5 70.5 70.5s70.5-31.6 70.5-70.5V99.3c13.6 9.8 30.3 15.6 48.3 15.6V79.1c-26.6 0-47.7-21.6-47.7-47.9V16Z"/></svg>
+          </a>
+          <a href="mailto:aminahdaisy141@gmail.com" aria-label="Email">✉️</a>
+        </div>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="#stops">Services</a>
+        <a href="#builder">Build a Package</a>
+        <a href="#booking">Book a Session</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#portal">Parent Portal</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <a href="#stops">Transit Services</a>
+        <a href="#stops">Academic Support</a>
+        <a href="#stops">Life Skills &amp; Culture</a>
+        <a href="#stops">Spiritual Growth</a>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <div class="row mono">0704 383 497</div>
+        <div class="row mono">0706 017 601</div>
+        <a href="mailto:aminahdaisy141@gmail.com">aminahdaisy141@gmail.com</a>
+        <a href="https://wa.me/256704383497" target="_blank" rel="noopener">WhatsApp Chat</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Little Stars Enrichment, Kampala. All rights reserved.</span>
+      <span>Final Stop 🌟 — thanks for riding with us.</span>
+    </div>
+  </div>
+</footer>
+>>>>>>> ce76cae315c78642ba7957ce1fe626b12854b9e2
 
 <a href="https://wa.me/256704383497?text=Hi%20Little%20Stars%20Enrichment%2C%20I%27d%20like%20to%20ask%20about%20a%20care%20package." class="float-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
 <button class="chat-toggle" id="chatToggle" aria-label="Chat with us">💬<span class="badge">1</span></button>
