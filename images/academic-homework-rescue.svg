@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Homework Rescue">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A8D2DF"/>
+      <stop offset="1" stop-color="#fff8fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="220" rx="28" fill="url(#bg)"/>
+  <circle cx="278" cy="42" r="46" fill="#fff" opacity=".36"/>
+  <circle cx="42" cy="186" r="32" fill="#A8D2DF" opacity=".48"/>
+  <g transform="translate(0 0)"><path d="M76 76h68c18 0 28 10 28 28v88H104c-16 0-28-12-28-28V76z" fill="#fff"/><path d="M172 104c0-18 10-28 28-28h44v116h-72v-88z" fill="#fff" opacity=".84"/><path d="M112 108h36M112 132h36M196 108h28M196 132h28" stroke="#8979B3" stroke-width="7" stroke-linecap="round"/></g>
+  <rect x="24" y="24" width="122" height="34" rx="17" fill="#fff" opacity=".88"/>
+  <text x="40" y="47" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="900" fill="#8979B3">Homework Rescue</text>
+  <text x="26" y="204" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="900" fill="#352942">Guided study time</text>
+</svg>

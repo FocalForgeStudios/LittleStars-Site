@@ -93,6 +93,19 @@ const LSData = (() => {
     };
   }
 
+
+  async function isBookingSlotAvailable(dateTime, packageName) {
+    const { data, error } = await supabase.rpc('is_booking_slot_available', {
+      slot_at: dateTime,
+      slot_package: packageName
+    });
+    if (error) {
+      console.warn('Slot availability check unavailable:', error.message);
+      return { available: null, error };
+    }
+    return { available: !!data, error: null };
+  }
+
   async function addBooking(b) {
     const session = await getSession();
     if (!session) return { error: new Error('Not signed in') };
@@ -187,7 +200,7 @@ const LSData = (() => {
   return {
     getSession, getProfile, signUpWithPassword, signInWithPassword, signInWithMagicLink, signOut, updateFullName,
     getChildren, addChild, removeChild,
-    getBookings, addBooking,
+    getBookings, isBookingSlotAvailable, addBooking,
     getPayments,
     getOrCreateThread, pushMessage, subscribeToThread,
     addPackageRequest, getMyPackageRequests

@@ -4,6 +4,8 @@
 
 // ---------- header scroll state ----------
 const header = document.getElementById('siteHeader');
+function lseEscapeHTML(value) { const d = document.createElement('div'); d.textContent = value ?? ''; return d.innerHTML; }
+function lseEscapeAttr(value) { return lseEscapeHTML(value).replace(/"/g, '&quot;'); }
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
 
 // ---------- mobile menu ----------
@@ -194,7 +196,7 @@ function populateBuilderChildSelect() {
     builderChildSelect.innerHTML = `<option value="">No children on your roster yet — use "Not listed" below</option>`;
   } else {
     builderChildSelect.innerHTML = `<option value="">Select a child from your roster…</option>` +
-      builderMyChildren.map(k => `<option value="${k.id}">${k.name}</option>`).join('');
+      builderMyChildren.map(k => `<option value="${lseEscapeAttr(k.id)}">${lseEscapeHTML(k.name)}</option>`).join('');
   }
 }
 builderChildSelect.addEventListener('change', () => {
@@ -235,9 +237,9 @@ function renderChildRoster(key) {
   roster.classList.toggle('open', kids.length > 0);
   roster.innerHTML = kids.map((kid, i) => `
     <div class="child-card">
-      <input type="text" placeholder="Child's full name" value="${kid.name || ''}" data-field="name" data-idx="${i}">
-      <input type="number" min="1" max="18" placeholder="Age" value="${kid.age || ''}" data-field="age" data-idx="${i}">
-      <input type="text" placeholder="Allergies / special needs (optional)" value="${kid.notes || ''}" data-field="notes" data-idx="${i}">
+      <input type="text" placeholder="Child's full name" value="${lseEscapeAttr(kid.name || '')}" data-field="name" data-idx="${i}">
+      <input type="number" min="1" max="18" placeholder="Age" value="${lseEscapeAttr(kid.age || '')}" data-field="age" data-idx="${i}">
+      <input type="text" placeholder="Allergies / special needs (optional)" value="${lseEscapeAttr(kid.notes || '')}" data-field="notes" data-idx="${i}">
       <button type="button" class="rm-child" title="Remove this child" data-idx="${i}">✕</button>
     </div>`).join('');
 
@@ -352,7 +354,7 @@ document.getElementById('sendWaBtn').addEventListener('click', async () => {
     addons: addonSummary,
     totalUGX: lastComputedTotal
   });
-  if (error) console.error('Could not save package request (WhatsApp will still open):', error.message);
+  if (error) console.warn('Could not save package request; WhatsApp will still open.');
 });
 
 recalc();
@@ -390,7 +392,7 @@ if (bookingForm) {
       childSelect.innerHTML = `<option value="">No children registered yet</option>`;
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '➕ Add a child in the Parent Portal first'; }
     } else {
-      childSelect.innerHTML = myChildrenCache.map(k => `<option value="${k.id}">${k.name}</option>`).join('');
+      childSelect.innerHTML = myChildrenCache.map(k => `<option value="${lseEscapeAttr(k.id)}">${lseEscapeHTML(k.name)}</option>`).join('');
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '📅 Confirm Booking'; }
     }
   }
@@ -426,8 +428,8 @@ if (bookingForm) {
       return `
       <div class="booking-item">
         <div class="top">
-          <div><div class="child">${b.childName}</div><div class="pkg">${b.package}</div></div>
-          <span class="status-pill ${b.status}">${b.status}</span>
+          <div><div class="child">${lseEscapeHTML(b.childName)}</div><div class="pkg">${lseEscapeHTML(b.package)}</div></div>
+          <span class="status-pill ${lseEscapeAttr(b.status)}">${lseEscapeHTML(b.status)}</span>
         </div>
         <div class="when">🕓 ${local} (your time) · 💻 ${b.mode}</div>
       </div>`;
@@ -444,13 +446,24 @@ if (bookingForm) {
     if (!dateInput.value || !timeInput.value) { alert('Please choose a date and time.'); return; }
     const pkg = document.getElementById('bookPackage').value;
     const eatISO = `${dateInput.value}T${timeInput.value}:00+03:00`;
+    const slotDateTime = new Date(eatISO).toISOString();
     const submitBtn = bookingForm.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
+    submitBtn.textContent = 'Checking availability...';
+    const slotCheck = await LSData.isBookingSlotAvailable(slotDateTime, pkg);
+    if (slotCheck.available === false) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Confirm Booking';
+      alert('This slot is already taken. Please choose another time.');
+      return;
+    }
+    submitBtn.textContent = 'Confirming...';
     const { error } = await LSData.addBooking({
       childId: kid.id, childName: kid.name, package: pkg,
-      dateTime: new Date(eatISO).toISOString(), durationMins: 60, mode: 'online'
+      dateTime: slotDateTime, durationMins: 60, mode: 'online'
     });
     submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm Booking';
     if (error) { alert('Could not book that session: ' + error.message); return; }
     await renderBookingList();
     bookingForm.reset();
@@ -530,6 +543,7 @@ if (addChildForm) {
       notes: notes.value.trim()
     });
     submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm Booking';
     if (error) { alert('Could not add child: ' + error.message); return; }
     name.value = ''; age.value = ''; notes.value = '';
     await renderPortal();
@@ -558,13 +572,12 @@ if (addChildForm) {
 
   let currentThread = null;
   let unsubscribe = null;
-  let isSignedIn = false;
 
   function escapeHTML(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
   function renderMessages() {
     if (!currentThread) {
-      body.innerHTML = `<div class="bubble them">Hi! Type your name above and send your first message — we usually reply within a few minutes. 👋</div>`;
+      body.innerHTML = `<div class="bubble them">Hi! Please sign in to the Parent Portal below first — that way our team always knows who they're chatting with. 🙂</div>`;
       return;
     }
     body.innerHTML = currentThread.messages.map(m => `
@@ -575,42 +588,24 @@ if (addChildForm) {
     body.scrollTop = body.scrollHeight;
   }
 
-  // Signed-in parents: identity locked to their account, thread persists.
-  // Anonymous guests: name field stays editable; a thread is created the
-  // moment they send their first message (so we don't create empty threads
-  // for every visitor who opens the chat bubble out of curiosity).
-  async function refreshSignInState() {
+  async function loadThreadIfSignedIn() {
     const session = await LSData.getSession();
-    isSignedIn = !!session;
-
-    if (isSignedIn) {
-      const profile = await LSData.getProfile();
-      nameField.value = profile?.full_name || session.user.email || '';
-      nameField.disabled = true;
-      // Load the existing thread (or create one silently in the background).
-      if (!currentThread) {
-        currentThread = await LSData.getOrCreateThread();
-        if (currentThread && !unsubscribe) {
-          unsubscribe = LSData.subscribeToThread(currentThread.id, (msg) => {
-            currentThread.messages.push({ sender: msg.sender, text: msg.text, time: new Date(msg.created_at).getTime() });
-            renderMessages();
-          });
-        }
-      }
-    } else {
-      // Signed out — clear the thread so the previous parent's messages
-      // don't show, and re-enable the name field for the next guest.
-      currentThread = null;
-      if (unsubscribe) { unsubscribe(); unsubscribe = null; }
-      nameField.disabled = false;
-      nameField.value = '';
+    if (!session) { currentThread = null; if (unsubscribe) { unsubscribe(); unsubscribe = null; } renderMessages(); return; }
+    const profile = await LSData.getProfile();
+    nameField.value = profile?.full_name || session.user.email || '';
+    nameField.disabled = true; // identity now comes from the account, not free text
+    currentThread = await LSData.getOrCreateThread();
+    if (currentThread && !unsubscribe) {
+      unsubscribe = LSData.subscribeToThread(currentThread.id, (msg) => {
+        currentThread.messages.push({ sender: msg.sender, text: msg.text, time: new Date(msg.created_at).getTime() });
+        renderMessages();
+      });
     }
-
     renderMessages();
   }
 
-  document.addEventListener('lse:authChanged', refreshSignInState);
-  refreshSignInState();
+  document.addEventListener('lse:authChanged', loadThreadIfSignedIn);
+  loadThreadIfSignedIn();
 
   toggle.addEventListener('click', () => {
     win.classList.toggle('open');
@@ -621,27 +616,7 @@ if (addChildForm) {
   async function send() {
     const text = input.value.trim();
     if (!text) return;
-
-    // For anonymous guests, create their thread lazily on first send.
-    if (!currentThread) {
-      const guestName = nameField.value.trim();
-      if (!guestName) {
-        nameField.focus();
-        nameField.style.borderColor = '#e05';
-        setTimeout(() => nameField.style.borderColor = '', 1800);
-        return;
-      }
-      currentThread = await LSData.getOrCreateThread(guestName);
-      if (!currentThread) { alert('Could not start the conversation — please try again.'); return; }
-      // Subscribe for live replies even in guest mode.
-      if (!unsubscribe) {
-        unsubscribe = LSData.subscribeToThread(currentThread.id, (msg) => {
-          currentThread.messages.push({ sender: msg.sender, text: msg.text, time: new Date(msg.created_at).getTime() });
-          renderMessages();
-        });
-      }
-    }
-
+    if (!currentThread) { alert('Please sign in to the Parent Portal first so we know who\'s messaging.'); return; }
     input.value = '';
     const { error } = await LSData.pushMessage(currentThread.id, 'parent', text);
     if (error) { alert('Message failed to send: ' + error.message); return; }
@@ -651,7 +626,6 @@ if (addChildForm) {
   sendBtn.addEventListener('click', send);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
 })();
-
 /* ===================================================================
    REDESIGN MOTION LAYER - copy-only enhancement for LittleStars Site Redesign
    =================================================================== */
@@ -689,5 +663,18 @@ if (addChildForm) {
       card.style.setProperty('--mx', `${x}px`);
       card.style.setProperty('--my', `${y}px`);
     });
+  });
+})();
+
+
+(function setupCookieBanner(){
+  const banner = document.getElementById('cookieBanner');
+  const btn = document.getElementById('cookieAcceptBtn');
+  if (!banner || !btn) return;
+  const key = 'lse_cookie_notice_acknowledged_v1';
+  if (localStorage.getItem(key) !== 'yes') banner.hidden = false;
+  btn.addEventListener('click', () => {
+    localStorage.setItem(key, 'yes');
+    banner.hidden = true;
   });
 })();
